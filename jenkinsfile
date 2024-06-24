@@ -1,19 +1,20 @@
 pipeline{
     agent any
-
-    stages{
-        stage('zip the file'){
+     
+     stages{
+        stages('zip the file'){
             steps{
                 sh 'zip -r ansible-${BUILD_ID}.zip * --exclude Jenkinsfile'
 
             }
         }
-        stage ('upload artifacts to jfrog')
+        stage ('upload artifacts to jfrog'){
             steps{
-                 sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
+                sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
                 ansible-${BUILD_ID}.zip \
-                "http:///artifactory/ansible/ansible-${BUILD_ID}.zip"'
+                "http://18.232.129.184/artifactory/ansible/ansible-${BUILD_ID}.zip"'
             }
-    }
+
+        }
+     }
 }
-                
